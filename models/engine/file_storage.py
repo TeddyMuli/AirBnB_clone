@@ -35,7 +35,7 @@ class FileStorage:
         """
         sets in __objects the `obj` with key <obj class name>.id
         """
-        obj = self.__objects[f"{obj.__class__.__name__}.{obj.id}"]
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """
