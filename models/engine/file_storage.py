@@ -43,8 +43,8 @@ class FileStorage:
         """
         with open(self.__file_path, "w", encoding="utf-8") as f:
             dict_store = {}
-            for i, j in self.__objects:
-                dict_store[i] = j.to_dict()
+            for k, v in self.__objects.items():
+                dict_store[k] = v.to_dict()
             json.dump(dict_store, f)
         
     def reload(self):
@@ -54,7 +54,7 @@ class FileStorage:
         """
         try:
             with open(self.__file_path, encoding="utf-8") as f:
-                for object in json.load(f).values():
-                    self.new(eval(object["__class__"])(**object))
+                for obj in json.load(f).values():
+                    self.new(eval(obj["__class__"])(**obj))
         except FileNotFoundError:
             return
